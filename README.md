@@ -1,7 +1,5 @@
-* show date in top menu
+PipelineDeals dotfiles
+======================
 
-* terminal row/column size
-* terminal window opacity
-* terminal window font
-
-* Sublime settings
+These are dotfiles that are generic enough to use on servers and
+delightful enough for developers to get comfy.
