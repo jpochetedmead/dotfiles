@@ -13,5 +13,3 @@ ln -fns /Users/bhilkert/Dropbox/code/dotfiles/vim/vimrc /Users/bhilkert/.vimrc
 ln -fns /Users/bhilkert/Dropbox/code/dotfiles/ack/ackrc /Users/bhilkert/.ackrc
 
 ln -fns /Users/bhilkert/Dropbox/code/dotfiles/ag/agignore /Users/bhilkert/.agignore
-
-osx/setup.sh

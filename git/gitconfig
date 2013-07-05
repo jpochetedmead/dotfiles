@@ -1,30 +1,51 @@
-[user]
-  name = Brandon Hilkert
-  email = brandonhilkert@gmail.com
-[core]
-  editor = vim
-  excludesfile = /Users/bhilkert/.gitignore
 [alias]
+  # copyin' svn, basically
   co = checkout
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   br = branch
   ci = commit
+  # try these for viewing logs
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  l = log --pretty=oneline -n 20 --graph
+  # normal status, or short status
+  st = status
+  s = status -s
+  # Undo a `git push`
+  undopush = push -f origin HEAD^:master
+  # set up a pull-request using hub gem, defaulting to the develop branch
+  pr = pull-request -b develop
+  # Switch to a branch, creating it if necessary
+  go = checkout -B
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+  # Clone a repository including all submodules
+  c = clone --recursive
+  # hard reset and clear all new created files
+  fuckit = !git clean -d -f && git reset --hard
+  # misc & self-explanatory
   amend = commit --amend
   aa = add --all
-  st = status
-  pr = remote prune origin
+  d = diff --patch-with-stat
   unstage = reset HEAD --
   last = log -1 -p HEAD
-  visual = !gitk
-  create = !sh -c 'git co -b \"$0\" && git push origin \"$0\" && git config \"branch.$0.remote\" origin && git config \"branch.$0.merge\" \"refs/heads/$0\"'
-  purge = !sh -c 'git branch -d \"$0\" && git push origin :\"$0\"'
-  fuckit = !git clean -d -f && git reset --hard
 [color]
   ui = true
-[format]
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [rerere]
   enabled = 1
+[merge]
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
 [push]
   default = current
-[heroku]
-  account = personal
