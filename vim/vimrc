@@ -187,7 +187,9 @@ highlight LineNR ctermfg=238
 highlight Visual term=none cterm=none ctermbg=240
 highlight Comment ctermfg=238
 highlight Search ctermfg=234 ctermbg=222
-highlight CursorLine term=none cterm=none ctermbg=236
+" This looks terrible on color schemes that aren't Tomorrow Night:
+" highlight CursorLine term=none cterm=none ctermbg=236
+highlight CursorLine term=none cterm=none
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree

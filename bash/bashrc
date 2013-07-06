@@ -47,9 +47,12 @@ else
     [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo " *"
   }
   function __git_ps1() {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty) ⮁ /"
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty) /"
   }
 fi
-PS1="\[$green\]\T\[$reset\] \[$red\]\u\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s)\[$reset\] \$ "
+function nick() {
+  cat ~/.machine_nickname
+}
+PS1="\[$red\]\$(nick)\[$reset\] \[$green\]\T\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
 PS2=" > "
 
