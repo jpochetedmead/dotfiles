@@ -1,5 +1,7 @@
 # the path is initially set to "/bin:/sbin:/usr/bin:/usr/sbin"
 export PATH=/usr/local/bin:$PATH:./bin
+# set the default editor in a way that works with `git commit`
+export EDITOR="vim -f"
 
 # aliases
 alias l="ls -l"
