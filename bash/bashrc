@@ -3,6 +3,8 @@ export PATH=/usr/local/bin:$PATH:./bin
 # set the default editor in a way that works with `git commit`
 export EDITOR="vim -f"
 
+source ~/.git-completion.sh
+
 # aliases
 alias l="ls -l"
 alias ll="ls -al"
@@ -15,8 +17,6 @@ alias unic="CACHE=true bundle exec unicorn_rails -c config/unicorn_development.r
 alias uni="bundle exec unicorn_rails -c config/unicorn_development.rb"
 alias rdb="rake db:migrate db:test:prepare"
 alias be="bundle exec"
-
-source ~/.git-completion.sh
 
 # Shut off control flow in terminal so we can use vim shortcut <c-s>
 stty -ixon -ixoff
