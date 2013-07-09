@@ -6,6 +6,7 @@ export EDITOR="vim -f"
 # aliases
 alias l="ls -l"
 alias ll="ls -al"
+alias git="hub" # INSTALL THE HUB GEM OR THIS BREAKS GIT
 alias g="git"
 alias reload="source ~/.bash_profile"
 alias redis="redis-server /usr/local/etc/redis.conf"

@@ -32,6 +32,7 @@ Bundle 'tpope/vim-git'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'edsono/vim-matchit'
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -106,6 +107,9 @@ set smartcase                   " ... unless they contain at least one capital l
 
 let mapleader=","
 
+" Always set cursor to first line when committing to git
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,6 +157,7 @@ nnoremap <leader><leader> <c-^>
 map <Leader>f :Ag<space>
 map <Leader>F :AgFromSearch<CR>
 imap ii <esc>
+vmap ii <esc>
 nnoremap <Leader>hs :set hlsearch!<cr>
 map <Leader>n :NERDTreeToggle<CR>
 
@@ -196,3 +201,8 @@ highlight CursorLine term=none cterm=none
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" I need to find a way to include this stuff in a separate file; there's no
+" reason to have it on a server
+Bundle 'digitaltoad/vim-jade'
+Bundle 'editorconfig/editorconfig-vim'
