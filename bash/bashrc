@@ -3,12 +3,9 @@ export PATH=/usr/local/bin:$PATH:./bin
 # set the default editor in a way that works with `git commit`
 export EDITOR="vim -f"
 
-source ~/.git-completion.sh
-
 # aliases
 alias l="ls -l"
 alias ll="ls -al"
-alias git="hub" # INSTALL THE HUB GEM OR THIS BREAKS GIT
 alias g="git"
 alias reload="source ~/.bash_profile"
 alias redis="redis-server /usr/local/etc/redis.conf"
@@ -17,6 +14,9 @@ alias unic="CACHE=true bundle exec unicorn_rails -c config/unicorn_development.r
 alias uni="bundle exec unicorn_rails -c config/unicorn_development.rb"
 alias rdb="rake db:migrate db:test:prepare"
 alias be="bundle exec"
+
+# Alias hub as git; hub is a fantastic package
+eval "$(hub alias -s)"
 
 # Shut off control flow in terminal so we can use vim shortcut <c-s>
 stty -ixon -ixoff

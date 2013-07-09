@@ -71,7 +71,6 @@ ln -fns $SRC/bash/bashrc $USER_DIR/$USER/.bashrc
 ln -fns $SRC/bash/bash_profile $USER_DIR/$USER/.bash_profile
 ln -fns $SRC/bash/functions $USER_DIR/$USER/.functions
 
-ln -fns $SRC/git/git-completion.sh $USER_DIR/$USER/.git-completion.sh
 rm $USER_DIR/$USER/.gitconfig
 cp -f   $SRC/git/gitconfig $USER_DIR/$USER/.gitconfig
 ln -fns $SRC/git/gitignore $USER_DIR/$USER/.gitignore
@@ -86,7 +85,7 @@ ln -fns $SRC/ag/agignore $USER_DIR/$USER/.agignore
 
 if [ -z $QUIET ]; then
   echo "Success! Check it out:"
-  ls -l $USER_DIR/$USER/.machine_nickname $USER_DIR/$USER/.bashrc $USER_DIR/$USER/.bash_profile $USER_DIR/$USER/.functions $USER_DIR/$USER/.git-completion.sh $USER_DIR/$USER/.gitconfig $USER_DIR/$USER/.gitignore $USER_DIR/$USER/.vimrc $USER_DIR/$USER/.ackrc $USER_DIR/$USER/.agignore
+  ls -l $USER_DIR/$USER/.machine_nickname $USER_DIR/$USER/.bashrc $USER_DIR/$USER/.bash_profile $USER_DIR/$USER/.functions $USER_DIR/$USER/.gitconfig $USER_DIR/$USER/.gitignore $USER_DIR/$USER/.vimrc $USER_DIR/$USER/.ackrc $USER_DIR/$USER/.agignore
   echo "
   Notice that .gitconfig is not symlinked, since your git username is set in .extra (see readme)"
 fi
