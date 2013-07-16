@@ -4,6 +4,7 @@ export PATH=/usr/local/bin:$PATH:./bin
 export EDITOR="vim -f"
 
 # aliases
+alias ls="ls -pG"
 alias l="ls -l"
 alias ll="ls -al"
 alias g="git"

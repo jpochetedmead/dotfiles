@@ -114,7 +114,7 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-set wildignore+=tmp/**,*.scssc,*.sassc
+set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
