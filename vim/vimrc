@@ -190,7 +190,7 @@ nnoremap <leader>x :x<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight LineNR ctermfg=238
 highlight Visual term=none cterm=none ctermbg=240
-highlight Comment ctermfg=238
+" highlight Comment ctermfg=238 " only works with dark backgrounds
 highlight Search ctermfg=234 ctermbg=222
 " This looks terrible on color schemes that aren't Tomorrow Night:
 " highlight CursorLine term=none cterm=none ctermbg=236

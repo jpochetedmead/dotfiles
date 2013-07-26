@@ -27,9 +27,6 @@ export RUBY_FREE_MIN=200000
 
 source ~/.functions
 
-# set up your git credentials, rbenv or rvm init, any special PATH or configs, etc
-source ~/.extra
-
 ############################
 # PROMPT
 ############################
@@ -60,3 +57,5 @@ function nick() {
 PS1="\[$red\]\$(nick)\[$reset\] \[$green\]\T\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
 PS2=" > "
 
+# set up your git credentials, rbenv or rvm init, any special PATH or configs, etc
+source ~/.extra
