@@ -15,3 +15,8 @@ fi
 function editconflicts() {
   vim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
 }
+
+# remove all versions of all gems for the current ruby
+function remove_all_gems() {
+  gem list | cut -d" " -f1 | xargs gem uninstall -aIx
+}
