@@ -49,3 +49,6 @@
   log = true
 [push]
   default = current
+[credential]
+  # cache entered username/pw for 8 hours
+  helper = cache --timeout=28800
