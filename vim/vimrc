@@ -83,7 +83,7 @@ set history=1000
 
 " Preseve undo across sessions
 if exists("&undodir")
-  set undodir=~/.vim-tmp/undo//
+  set undodir=~/.vim-tmp/undo/
   set undofile
 endif
 
