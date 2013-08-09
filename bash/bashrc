@@ -15,6 +15,7 @@ alias unic="CACHE=true bundle exec unicorn_rails -c config/unicorn_development.r
 alias uni="bundle exec unicorn_rails -c config/unicorn_development.rb"
 alias rdb="rake db:migrate db:test:prepare"
 alias be="bundle exec"
+alias spec="time spec -cf n"
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"
