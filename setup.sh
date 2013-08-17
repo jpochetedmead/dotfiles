@@ -86,11 +86,13 @@ ln -fns $SRC/ack/ackrc $USER_DIR/$USER/.ackrc
 ln -fns $SRC/ag/agignore $USER_DIR/$USER/.agignore
 
 ln -fns $SRC/tmux/tmux.conf $USER_DIR/$USER/.tmux.conf
+
+ln -fns $SRC/ruby/gemrc $USER_DIR/$USER/.gemrc
 # AND THAT'S IT, REALLY
 
 if [ -z $QUIET ]; then
   echo "Success! Check it out:"
-  ls -l $USER_DIR/$USER/.machine_nickname $USER_DIR/$USER/.bashrc $USER_DIR/$USER/.bash_profile $USER_DIR/$USER/.functions $USER_DIR/$USER/.gitconfig $USER_DIR/$USER/.gitignore $USER_DIR/$USER/.vim-tmp $USER_DIR/$USER/.vimrc $USER_DIR/$USER/.ackrc $USER_DIR/$USER/.agignore $USER_DIR/$USER/.tmux.conf
+  ls -ld $USER_DIR/$USER/.machine_nickname $USER_DIR/$USER/.bashrc $USER_DIR/$USER/.bash_profile $USER_DIR/$USER/.functions $USER_DIR/$USER/.gitconfig $USER_DIR/$USER/.gitignore $USER_DIR/$USER/.vim-tmp $USER_DIR/$USER/.vimrc $USER_DIR/$USER/.ackrc $USER_DIR/$USER/.agignore $USER_DIR/$USER/.tmux.conf $USER_DIR/$USER/.gemrc
   echo "
   Notice that .gitconfig is not symlinked, since your git username is set in .extra (see readme)"
 fi
