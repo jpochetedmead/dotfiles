@@ -74,7 +74,6 @@ ln -fns $SRC/bash/bashrc $USER_DIR/$USER/.bashrc
 ln -fns $SRC/bash/bash_profile $USER_DIR/$USER/.bash_profile
 ln -fns $SRC/bash/functions $USER_DIR/$USER/.functions
 
-rm $USER_DIR/$USER/.gitconfig
 cp -f   $SRC/git/gitconfig $USER_DIR/$USER/.gitconfig
 ln -fns $SRC/git/gitignore $USER_DIR/$USER/.gitignore
 
