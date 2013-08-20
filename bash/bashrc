@@ -44,7 +44,7 @@ if hash brew 2>/dev/null && [ -f `brew --prefix`/etc/bash_completion ]; then
   export GIT_PS1_SHOWSTASHSTATE=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
 elif [ -f /etc/bash_completion ]; then
-  /etc/bash_completion
+  . /etc/bash_completion
   export GIT_PS1_SHOWDIRTYSTATE=1
   export GIT_PS1_SHOWSTASHSTATE=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
