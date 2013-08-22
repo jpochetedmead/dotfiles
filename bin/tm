@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tmux -S /tmp/pair has-session -t 0
+if [ $? != 0 ]; then
+  tmux -S /tmp/pair new-session -d -s 0
+fi
+tmux -S /tmp/pair attach-session -t 0

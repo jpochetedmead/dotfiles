@@ -119,7 +119,7 @@ set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vroom_spec_command="spec "
+let g:vroom_spec_command="spec -cf n "
 let g:vroom_rspec_version="1.x"
 map <Leader>r :VroomRunTestFile<CR>
 map <Leader>e :VroomRunNearestTest<CR>
