@@ -59,7 +59,7 @@ fi
 function nick() {
   cat ~/.machine_nickname
 }
-PS1="\[$red\]\$(nick)\[$reset\] \[$green\]\T\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
+PS1="\[$red\]\$(nick)\[$reset\] \[$green\]\t\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
 PS2=" > "
 
 # set up your git credentials, rbenv or rvm init, any special PATH or configs, etc
