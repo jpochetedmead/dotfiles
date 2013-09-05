@@ -2,21 +2,15 @@
 
 set -e
 
-INSTRUCTIONS="You can probably just run this, on a mac.  By default, it assumes that:
+INSTRUCTIONS="You can probably run this with no options, on OSX. Options:
 
- * you're running this on your local machine, which you'd like to nickname
-   'local'. If not, you can nickname it something else by setting -n
- * you're running this file from within the directory where it's saved.
-   If not, set -s with the correct source directory.
- * you're running this file on an osx-like system where user
-   directories are stored in '/Users'. If not, set -d with the correct user
-   directory path (don't include the actual folder at the end, that's
-   the next option)
- * you're running this file to set up your own stuff (that is, you're
-   running it as the user you're setting up). If not, you'll need to set
-   -u with the correct username.
-
-You can also run it with -q for quiet-mode (no output on success)."
+ -n  Set the machine nickname. Defaults to 'local'.
+ -d  Set the users' directory location. Defaults to '/Users' for OSX.
+     DO NOT include your actual user directory at the end. See '-u'.
+ -s  Set the source directory (that is, where this file is stored).
+     Defaults to your current working directory.
+ -u  Set the user. Defaults to your username, '`whoami`'.
+ -q  Quiet mode (no output on success)."
 
 SRC=$PWD
 USER_DIR="/Users"

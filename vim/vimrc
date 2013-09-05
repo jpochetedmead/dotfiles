@@ -46,7 +46,6 @@ colorscheme default
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-set cursorline
 set laststatus=2
 
 " Don't show current mode b/c we have powerline
@@ -100,7 +99,6 @@ autocmd BufReadPost *
      \ endif
 
 " Searching
-set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
@@ -193,13 +191,12 @@ nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color stuff b/c it doesn't work after setting the colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight LineNR ctermfg=238
-highlight Visual term=none cterm=none ctermbg=240
+" highlight LineNR ctermfg=238
+" highlight Visual term=none cterm=none ctermbg=240
 " highlight Comment ctermfg=238 " only works with dark backgrounds
 highlight Search ctermfg=234 ctermbg=222
-" This looks terrible on color schemes that aren't Tomorrow Night:
-" highlight CursorLine term=none cterm=none ctermbg=236
-highlight CursorLine term=none cterm=none
+" highlight CursorLine term=none cterm=none ctermbg=236 " sucks on most color schemes
+" highlight CursorLine term=none cterm=none " this makes Ag plugin suck
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree
