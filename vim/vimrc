@@ -33,6 +33,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'edsono/vim-matchit'
+Bundle 'terryma/vim-multiple-cursors'
 
 filetype plugin indent on       " load file type plugins + indentation
 
