@@ -57,13 +57,13 @@ set noshowmode
 set showmatch
 set showcmd                     " display incomplete commands
 set ruler
+set relativenumber
 set number
 set wildmenu
 set wildmode=longest,list
 set visualbell
 set splitright
 set splitbelow
-set clipboard=unnamed
 
 " Store temporary files in a central spot
 set backup
@@ -200,6 +200,8 @@ nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<
 highlight Search ctermfg=234 ctermbg=222
 " highlight CursorLine term=none cterm=none ctermbg=236 " sucks on most color schemes
 " highlight CursorLine term=none cterm=none " this makes Ag plugin suck
+highlight String ctermfg=12
+highlight Constant ctermfg=13
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree
