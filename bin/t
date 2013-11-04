@@ -1,0 +1,15 @@
+#!/bin/sh
+
+PROJECT=$1
+
+tmux has-session -t $PROJECT
+if [ $? != 0 ]
+then
+  tmux new-session -d -s $PROJECT
+
+  tmux send-keys    -t $PROJECT:0.0 "cd ~/Code/$PROJECT && vim" C-m
+  tmux split-window -t $PROJECT:0.0 -v -p 20
+  tmux send-keys    -t $PROJECT:0.1 "cd ~/Code/$PROJECT" C-m
+  tmux select-pane  -t $PROJECT:0.0
+fi
+tmux -2 attach-session -t $PROJECT

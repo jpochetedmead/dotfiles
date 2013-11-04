@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SESSION=$1
+
+tmux kill-session -t $SESSION

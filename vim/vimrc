@@ -195,8 +195,8 @@ nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color stuff b/c it doesn't work after setting the colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" highlight LineNR ctermfg=238
-" highlight Visual term=none cterm=none ctermbg=240
+highlight LineNR ctermfg=238
+highlight Visual term=none cterm=none ctermbg=240
 " highlight Comment ctermfg=238 " only works with dark backgrounds
 highlight Search ctermfg=234 ctermbg=222
 " highlight CursorLine term=none cterm=none ctermbg=236 " sucks on most color schemes
