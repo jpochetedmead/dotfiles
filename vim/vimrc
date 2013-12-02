@@ -116,7 +116,8 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
+" set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled* --> set this in .agignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
