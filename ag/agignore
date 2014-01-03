@@ -6,3 +6,4 @@ tmp
 *.sassc
 *compiled*
 .git
+*/cache/**
