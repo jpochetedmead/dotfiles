@@ -2,7 +2,7 @@
 
 PROJECT=$1
 
-tmux has-session -t $PROJECT
+tmux has-session -t $PROJECT 2>/dev/null
 if [ $? != 0 ]
 then
   tmux new-session -d -s $PROJECT

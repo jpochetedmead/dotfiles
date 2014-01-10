@@ -28,10 +28,13 @@
   dc = diff --cached --patch-with-stat
   unstage = reset HEAD --
   last = log -1 -p HEAD
+  # remove all local branches that have been merged to master
+  delbr =! bash -c 'git branch --merged | grep -v "\\*" | xargs -n 1 git branch -d'
   # get the github url of the current repo
   url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
   # list all conflicted files
   conflicts = diff --name-only --diff-filter=U
+  con =! git s `git conflicts`
 [color]
   ui = true
 [color "branch"]

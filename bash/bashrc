@@ -17,6 +17,11 @@ alias uni="bundle exec unicorn_rails -c config/unicorn_development.rb"
 alias rdb="rake db:migrate db:test:prepare"
 alias be="bundle exec"
 alias spec="time spec -cf n"
+alias vag="vagrant up && vagrant ssh"
+alias halt="vagrant halt"
+alias wow="git s"
+alias such=git
+alias very=git
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"

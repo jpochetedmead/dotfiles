@@ -37,6 +37,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'ecomba/vim-ruby-refactoring'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -116,8 +117,8 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-" set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled* --> set this in .agignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
