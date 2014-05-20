@@ -1,5 +1,7 @@
+# set PATH in ~/.extra after ruby paths are added
 # the path is initially set to "/bin:/sbin:/usr/bin:/usr/sbin"
-export PATH=~/bin:/usr/local/bin:$PATH:./script:./bin
+# export PATH="./script:./bin:~/bin:/usr/local/bin:$PATH"
+
 # set the default editor in a way that works with `git commit`
 export EDITOR="vim -f"
 
@@ -8,15 +10,20 @@ alias ls="ls -p"
 alias l="ls -l"
 alias ll="ls -al"
 alias g="git"
+alias gg="gitsh"
 alias v="vim"
 alias reload="source ~/.bash_profile"
 alias redis="redis-server /usr/local/etc/redis.conf"
 alias worker="QUEUE=* bundle exec rake resque:work"
 alias unic="CACHE=true bundle exec unicorn_rails -c config/unicorn_development.rb"
 alias uni="bundle exec unicorn_rails -c config/unicorn_development.rb"
-alias rdb="rake db:migrate db:test:prepare"
+alias rdb="rake db:migrate RAILS_ENV=test"
 alias be="bundle exec"
+alias b="bundle"
 alias spec="time spec -cf n"
+alias db="rake db:migrate RAILS_ENV=test"
+alias u="rails s"
+alias j="jekyll serve --baseurl ''"
 alias vag="vagrant up && vagrant ssh"
 alias halt="vagrant halt"
 alias wow="git s"
@@ -29,8 +36,6 @@ eval "$(hub alias -s)"
 # Shut off control flow in terminal so we can use vim shortcut <c-s>
 stty -ixon -ixoff
 
-export RUBY_GC_MALLOC_LIMIT=60000000
-export RUBY_FREE_MIN=200000
 export LANGUAGE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
@@ -58,10 +63,10 @@ elif [ -f /etc/bash_completion ]; then
   export GIT_PS1_SHOWUNTRACKEDFILES=1
 else
   function parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo " *"
+    [[ $(command git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo " *"
   }
   function __git_ps1() {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty) /"
+    command git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty) /"
   }
 fi
 function nick() {
