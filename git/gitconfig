@@ -3,6 +3,7 @@
   co = checkout
   br = branch
   ci = commit
+  r = remote -v
   # try these for viewing logs
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   l = log --pretty=oneline -n 20 --graph
