@@ -20,3 +20,12 @@ function editconflicts() {
 function remove_all_gems() {
   gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 }
+
+# pipeline ssh shortcut
+function pssh() {
+  ssh -i ~/.ssh/pd-app-server ubuntu@"$@"
+}
+
+function pscp() {
+  scp -i ~/.ssh/pd-app-server "$1" ubuntu@"$2"
+}

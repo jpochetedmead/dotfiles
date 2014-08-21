@@ -40,6 +40,7 @@ Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'dart-lang/dart-vim-plugin'
+Bundle 'vim-scripts/scratch.vim'
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -96,6 +97,15 @@ endif
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
+" Make the current window big, but leave others context
+set winwidth=84
+" We have to have a winheight bigger than we want to set winminheight. But if
+" we set winheight to be huge before winminheight, the winminheight set will
+" fail.
+set winheight=5
+set winminheight=5
+set winheight=999
+
 " Remove trailing whitepsace from Ruby files on save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -119,7 +129,7 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
+set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*,vendor/mailchimp*
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,6 +137,7 @@ set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vroom_spec_command="spec -cf n "
 let g:vroom_rspec_version="1.x"
+" let g:vroom_spec_command="rspec -f d"
 map <Leader>r :VroomRunTestFile<CR>
 map <Leader>e :VroomRunNearestTest<CR>
 
@@ -145,14 +156,6 @@ endfunction
 map <leader>m :call RenameFile()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ARROW KEYS ARE UNACCEPTABLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move around splits with <c-hjkl>
@@ -168,6 +171,7 @@ imap ii <esc>
 vmap ii <esc>
 nnoremap <Leader>hs :set hlsearch!<cr>
 map <Leader>n :NERDTreeToggle<CR>
+nnoremap <leader>N :set relativenumber!<cr> :set number!<cr>
 
 "create newline using Enter or \ without entering insert mode
 nmap \ O<Esc>
@@ -218,3 +222,21 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " reason to have it on a server
 Bundle 'digitaltoad/vim-jade'
 Bundle 'editorconfig/editorconfig-vim'
+
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>

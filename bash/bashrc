@@ -23,12 +23,15 @@ alias b="bundle"
 alias spec="time spec -cf n"
 alias db="rake db:migrate RAILS_ENV=test"
 alias u="rails s"
+alias f="foreman start"
 alias j="jekyll serve --baseurl ''"
+alias m="be middleman"
 alias vag="vagrant up && vagrant ssh"
 alias halt="vagrant halt"
 alias wow="git s"
 alias such=git
 alias very=git
+alias y="git s" # overzealous patchwise commits!
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"
@@ -77,7 +80,7 @@ if [[ `nick` = "local" ]]; then
 else
   nickcolor=$red
 fi
-PS1="\[$nickcolor\]\$(nick)\[$reset\] \[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
+PS1="\[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]\$ "
 PS2=" > "
 
 # set up your git credentials, rbenv or rvm init, any special PATH or configs, etc

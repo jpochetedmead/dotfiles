@@ -36,6 +36,8 @@
   # list all conflicted files
   conflicts = diff --name-only --diff-filter=U
   con =! git s `git conflicts`
+  # always include untracked in stash
+  stash = stash --include-untracked
 [color]
   ui = true
 [color "branch"]
