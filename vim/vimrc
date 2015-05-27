@@ -1,7 +1,10 @@
+set shell=/bin/bash
 set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8
 filetype off
 set mouse=a
+let mapleader=" "
+
 
 " terminal vim sucks at pasting; press F2 to toggle making it better
 nnoremap <F2> :set invpaste paste?<CR>
@@ -41,6 +44,14 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'dart-lang/dart-vim-plugin'
 Bundle 'vim-scripts/scratch.vim'
+Bundle 'editorconfig/editorconfig-vim'
+Bundle 'Townk/vim-autoclose'
+Bundle 'tpope/vim-endwise'
+Bundle 'vim-scripts/vim-pencil'
+Bundle 'elixir-lang/vim-elixir'
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -54,10 +65,12 @@ colorscheme default
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-set laststatus=2
 
 " Don't show current mode b/c we have powerline
 set noshowmode
+set laststatus=2
+nnoremap <leader>s :set laststatus=0 showmode<cr>
+nnoremap <leader>S :set laststatus=2 noshowmode<cr>
 
 set showmatch
 set showcmd                     " display incomplete commands
@@ -77,10 +90,12 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Whitespace
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set expandtab                   " use spaces, not tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set autoindent
+
+nnoremap <leader><cr> :set wrap! linebreak!<cr>
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -97,17 +112,17 @@ endif
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
-" Make the current window big, but leave others context
-set winwidth=84
-" We have to have a winheight bigger than we want to set winminheight. But if
-" we set winheight to be huge before winminheight, the winminheight set will
-" fail.
-set winheight=5
-set winminheight=5
-set winheight=999
+" Remove trailing whitespace from files on save
+" (except files with "b:noStripWhitespace=1" (only markdown by default))
+fun! StripTrailingWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown'
+        return
+    endif
+    %s/\s\+$//e
+endfun
 
-" Remove trailing whitepsace from Ruby files on save
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 " Return to last edit position when openind files (You want this!)
 autocmd BufReadPost *
@@ -120,26 +135,28 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
-let mapleader=","
-
 " Always set cursor to first line when committing to git
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+" Set filetype to JS for *.es6 files
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*,vendor/mailchimp*
+set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*,vendor/mailchimp*,build,*bower_components*,*node_modules*
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vroom_spec_command="spec -cf n "
-let g:vroom_rspec_version="1.x"
-" let g:vroom_spec_command="rspec -f d"
+let g:vroom_spec_command="rspec -f d"
 map <Leader>r :VroomRunTestFile<CR>
 map <Leader>e :VroomRunNearestTest<CR>
+
+" simpler custom "vroom"
+nmap <leader>t :w<cr>\|:!time bin/rake test<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
@@ -167,11 +184,10 @@ nnoremap <c-l> <c-w>l
 nnoremap <leader><leader> <c-^>
 map <Leader>f :Ag<space>
 map <Leader>F :AgFromSearch<CR>
-imap ii <esc>
-vmap ii <esc>
 nnoremap <Leader>hs :set hlsearch!<cr>
 map <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader>N :set relativenumber!<cr> :set number!<cr>
+
 
 "create newline using Enter or \ without entering insert mode
 nmap \ O<Esc>
@@ -185,12 +201,6 @@ vmap <C-Tab> <
 
 " Make Y behave like D or C, instead of dd or yy
 nnoremap Y y$
-
-" Open the associated file in a horizontal split (ruby)
-map <leader>s :AS<cr>
-
-" Open the associated file in a vertical split (ruby)
-map <leader>v :AV<cr>
 
 "save & quit & reload faster
 nnoremap <leader>q :q<CR>
@@ -211,17 +221,18 @@ highlight Search ctermfg=234 ctermbg=222
 " highlight CursorLine term=none cterm=none " this makes Ag plugin suck
 highlight String ctermfg=12
 highlight Constant ctermfg=13
+hi clear SpellBad
+hi clear SpellCap
+hi SpellBad cterm=underline
+hi SpellBad ctermfg=9
+hi SpellCap cterm=underline
+hi SpellCap ctermfg=6
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" I need to find a way to include this stuff in a separate file; there's no
-" reason to have it on a server
-Bundle 'digitaltoad/vim-jade'
-Bundle 'editorconfig/editorconfig-vim'
 
 function! ShowRoutes()
   " Requires 'scratch' plugin
@@ -240,3 +251,21 @@ function! ShowRoutes()
   :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
+
+let g:pencil#wrapModeDefault = 'soft'
+augroup pencil
+  autocmd!
+  autocmd FileType markdown call pencil#init()
+  autocmd FileType textile call pencil#init()
+  autocmd FileType text call pencil#init({'wrap': 'hard'})
+augroup END
+nmap <leader>p :TogglePencil<cr>
+
+nmap <leader>c :set spell!<cr>
+" breaks <c-i>!
+" nnoremap <Tab> ]s
+" nnoremap <right> z=
+
+" turn off Ex mode!
+:nnoremap Q <Nop>
+:nnoremap qQ <Nop>
