@@ -1,23 +1,8 @@
-PipelineDeals dotfiles
+chadoh's dotfiles
 ======================
 
 These are dotfiles that are generic enough to use on servers and
 delightful enough for developers to get comfy.
-
-Machine Nickname
-----------------
-
-Since a big focus of these dotfiles is being able to use them on
-various servers as well as locally, it's nice to have a machine name in
-the prompt. However, the names of ec2 instances or even your own dev machine
-are probably not the most useful or concise names to have in the prompt.
-
-A rather nice solution is to create a `~/.machine_nickname` file, and read its
-contents into the prompt.
-
-The setup.sh script assumes a local, osx environment, and will thus nickname
-your machine "local" unless you specify a `-n` flag with a different nickname.
-Try running `./setup.sh -h` for more info.
 
 .extra
 ------
