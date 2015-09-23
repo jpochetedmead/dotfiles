@@ -49,8 +49,9 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-endwise'
 Bundle 'vim-scripts/vim-pencil'
 Bundle 'elixir-lang/vim-elixir'
-Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
+Bundle 'slim-template/vim-slim'
+Bundle 'pangloss/vim-javascript'
 
 
 filetype plugin indent on       " load file type plugins + indentation
@@ -145,7 +146,8 @@ autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ignore Rubinius, Sass cache files
-set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*,vendor/mailchimp*,build,*bower_components*,*node_modules*
+set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
+let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\).*'
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,6 +235,7 @@ hi SpellCap ctermfg=6
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeWildIgnore=0
 
 function! ShowRoutes()
   " Requires 'scratch' plugin
