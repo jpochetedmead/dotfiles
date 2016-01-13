@@ -32,7 +32,7 @@
   # remove all local branches that have been merged to master
   delbr =! bash -c 'git branch --merged | grep -v "\\*" | xargs -n 1 git branch -d'
   # get the github url of the current repo
-  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
+  url =! bash -c 'git config --get remote.origin.url | sed s-git@-https://- | sed s-com:-com/- | sed -E s-.git\\$--'
   # list all conflicted files
   conflicts = diff --name-only --diff-filter=U
   con =! git s `git conflicts`

@@ -35,10 +35,7 @@ alias very=git
 alias y="git s" # overzealous patchwise commits!
 alias p='g p'
 alias http='python -m SimpleHTTPServer'
-alias r3='env |grep USE_RAILS_3'
-alias ur3='export USE_RAILS_3=true'
-alias cr3='unset USE_RAILS_3'
-alias fuck='$(thefuck $(fc -ln -1))'
+alias run='npm run --silent'
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"
