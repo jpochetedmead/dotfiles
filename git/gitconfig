@@ -8,8 +8,8 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   l = log --pretty=oneline -n 20 --graph
   # normal status, or short status
-  st = status
-  s = status -s
+  st = !"git status; git submodule foreach 'git status'"
+  s = !"git status -s; git submodule foreach 'git status -s'"
   # Undo a `git push`
   undopush = push -f origin HEAD^:master
   # set up a pull-request using hub gem, defaulting to the develop branch
@@ -63,3 +63,5 @@
 [credential]
   # cache entered username/pw for 8 hours
   helper = cache --timeout=28800
+[core]
+	excludesfile = ~/.gitignore
