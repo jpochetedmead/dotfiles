@@ -17,7 +17,7 @@
   # Switch to a branch, creating it if necessary
   go = checkout -B
   # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull; git submodule foreach git pull origin master"
+  p = !"git pull --recurse-submodules"
   # Clone a repository including all submodules
   c = clone --recursive
   # hard reset and clear all new created files
