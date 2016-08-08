@@ -212,6 +212,10 @@ nnoremap <leader>x :x<CR>
 " browse to the current line on Github
 nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
 
+" allow copying to system clipboard. May work in tandem with tmux
+" https://github.com/lmarburger/dotfiles/blob/master/tmux.conf#L8-L13
+set clipboard=unnamed
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color stuff b/c it doesn't work after setting the colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
