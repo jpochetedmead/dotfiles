@@ -52,7 +52,13 @@ Bundle 'elixir-lang/vim-elixir'
 Bundle 'mxw/vim-jsx'
 Bundle 'slim-template/vim-slim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'ngmy/vim-rubocop'
+Bundle 'rust-lang/rust.vim'
+Bundle 'cespare/vim-toml'
+Bundle 'chase/vim-ansible-yaml'
 
+" enable jsx syntax highlighting in .js files
+let g:jsx_ext_required = 0
 
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -95,6 +101,10 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces, not tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set autoindent
+
+" Show some whitespace chars
+set list
+set listchars=tab:▸·,trail:·
 
 nnoremap <leader><cr> :set wrap! linebreak!<cr>
 
@@ -276,3 +286,11 @@ nmap <leader>c :set spell!<cr>
 " turn off Ex mode!
 :nnoremap Q <Nop>
 :nnoremap qQ <Nop>
+
+
+" rubocop
+let g:vimrubocop_config = '/Users/chadoh/.rubocop.yml'
+
+
+" rust
+autocmd Filetype rust setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
