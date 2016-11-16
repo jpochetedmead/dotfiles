@@ -4,6 +4,7 @@ set encoding=utf-8
 filetype off
 set mouse=a
 let mapleader=" "
+inoremap jj <ESC>
 
 
 " terminal vim sucks at pasting; press F2 to toggle making it better
@@ -14,48 +15,58 @@ set showmode
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'epmatsw/ag.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tomtom/tlib_vim'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle "garbas/vim-snipmate"
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'nono/vim-handlebars'
-Bundle 'tpope/vim-rails'
-Bundle 'skalnik/vim-vroom'
-Bundle 'tpope/vim-bundler'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rake'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-git'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'edsono/vim-matchit'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
-Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'vim-scripts/slimv.vim'
-Bundle 'dart-lang/dart-vim-plugin'
-Bundle 'vim-scripts/scratch.vim'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'Townk/vim-autoclose'
-Bundle 'tpope/vim-endwise'
-Bundle 'vim-scripts/vim-pencil'
-Bundle 'elixir-lang/vim-elixir'
-Bundle 'mxw/vim-jsx'
-Bundle 'slim-template/vim-slim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'ngmy/vim-rubocop'
-Bundle 'rust-lang/rust.vim'
-Bundle 'cespare/vim-toml'
-Bundle 'chase/vim-ansible-yaml'
+call plug#begin('~/.vim/plugged')
+Plug 'epmatsw/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'nono/vim-handlebars'
+Plug 'tpope/vim-rails'
+Plug 'skalnik/vim-vroom'
+Plug 'tpope/vim-bundler'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-git'
+Plug 'kchmck/vim-coffee-script'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='bubblegum'
+
+Plug 'tmhedberg/matchit'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'vim-scripts/slimv.vim'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'vim-scripts/scratch.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'spf13/vim-autoclose'
+Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/vim-pencil'
+Plug 'elixir-lang/vim-elixir'
+Plug 'mxw/vim-jsx'
+Plug 'slim-template/vim-slim'
+Plug 'pangloss/vim-javascript'
+Plug 'ngmy/vim-rubocop'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'chase/vim-ansible-yaml'
+Plug 'elmcast/elm-vim'
+let g:elm_format_autosave = 1
+
+call plug#end()
 
 " enable jsx syntax highlighting in .js files
 let g:jsx_ext_required = 0
@@ -73,7 +84,7 @@ colorscheme default
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
-" Don't show current mode b/c we have powerline
+" Don't show current mode b/c we have airline
 set noshowmode
 set laststatus=2
 nnoremap <leader>s :set laststatus=0 showmode<cr>
@@ -163,12 +174,11 @@ let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\).*'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vroom_spec_command="rspec -f d"
+let g:vroom_test_unit_command="m "
 map <Leader>r :VroomRunTestFile<CR>
 map <Leader>e :VroomRunNearestTest<CR>
 
-" simpler custom "vroom"
-nmap <leader>t :w<cr>\|:!time bin/rake test<cr>
+nmap <leader>t :w<cr>\|:!time npm run --silent test<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
