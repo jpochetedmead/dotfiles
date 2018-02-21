@@ -4,16 +4,12 @@ set encoding=utf-8
 filetype off
 set mouse=a
 let mapleader=" "
-inoremap jj <ESC>
 
 
 " terminal vim sucks at pasting; press F2 to toggle making it better
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
 call plug#begin('~/.vim/plugged')
 Plug 'epmatsw/ag.vim'
@@ -24,7 +20,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'nono/vim-handlebars'
 Plug 'tpope/vim-rails'
 Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-bundler'
@@ -207,7 +202,8 @@ nnoremap <leader><leader> <c-^>
 map <Leader>f :Ag<space>
 map <Leader>F :AgFromSearch<CR>
 nnoremap <Leader>hs :set hlsearch!<cr>
-map <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>m :NERDTreeFind<CR>
 nnoremap <leader>N :set relativenumber!<cr> :set number!<cr>
 
 

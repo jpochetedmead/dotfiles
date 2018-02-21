@@ -7,3 +7,7 @@ tmp
 *compiled*
 .git
 */cache/**
+node_modules
+build
+dist
+yarn.lock

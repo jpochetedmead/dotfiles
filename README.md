@@ -4,6 +4,8 @@ chadoh's dotfiles
 These are dotfiles that are generic enough to use on servers and
 delightful enough for developers to get comfy.
 
+To get started, clone the repo, `cd` into it, and run `./setup.sh`
+
 .extra
 ------
 
@@ -35,11 +37,12 @@ git config --global github.user chadoh
 vim
 ---
 
-For the vim setup to work, you first need to install [Vundle] by running
+For the vim setup to work, you first need to install [vim-plug] by running
 
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-Then once you start vim, install all the plugins by running `:BundleInstall`.
+Then once you start vim, install all the plugins by running `:PlugInstall`.
 
-  [Vundle]: https://github.com/gmarik/vundle
+  [vim-plug]: https://github.com/junegunn/vim-plug
 

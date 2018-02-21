@@ -29,12 +29,3 @@ function pssh() {
 function pscp() {
   scp -i ~/.ssh/pd-app-server "$1" ubuntu@"$2"
 }
-
-nvm_switch_if_needed() {
-    local NVM_RC_VERSION
-    local REAL_VERSION
-    read NVM_RC_VERSION < $(nvm_find_nvmrc)
-    REAL_VERSION=$(nvm_version $NVM_RC_VERSION)
-    [ "$(nvm_version_path $REAL_VERSION)/bin" == "$NVM_BIN" ] || nvm use
-}
-cd() { builtin cd "$@"; nvm_switch_if_needed; }
