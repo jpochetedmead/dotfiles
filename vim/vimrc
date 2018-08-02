@@ -1,5 +1,4 @@
 set shell=/bin/bash
-set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8
 filetype off
 set mouse=a
@@ -12,16 +11,13 @@ set pastetoggle=<F2>
 set showmode
 
 call plug#begin('~/.vim/plugged')
-Plug 'epmatsw/ag.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'scrooloose/nerdtree'
 Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-bundler'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rake'
@@ -30,13 +26,6 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-git'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='bubblegum'
-
 Plug 'tmhedberg/matchit'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/webapi-vim'
@@ -44,23 +33,58 @@ Plug 'mattn/gist-vim'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'vim-scripts/slimv.vim'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'vim-scripts/scratch.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'spf13/vim-autoclose'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/vim-pencil'
-Plug 'elixir-lang/vim-elixir'
+Plug 'junegunn/goyo.vim'
+
+let g:goyo_width = '80'
+let g:goyo_height = '95%'
+
+Plug 'junegunn/limelight.vim'
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 Plug 'mxw/vim-jsx'
-Plug 'slim-template/vim-slim'
 Plug 'pangloss/vim-javascript'
+let g:javascript_plugin_flow = 1
+
 Plug 'ngmy/vim-rubocop'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'chase/vim-ansible-yaml'
-Plug 'elmcast/elm-vim'
-let g:elm_format_autosave = 1
+Plug 'sbdchd/neoformat'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
 
+let g:mix_format_on_save = 1
+
+Plug 'neomake/neomake'
+Plug 'vim-syntastic/syntastic'
+
+" let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute']
+" " set statusline+=%#warningmsg#
+" " set statusline+=%{SyntasticStatuslineFlag()}
+" " set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_javascript_checkers=['eslint', 'flow']
+" let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
+" let g:syntastic_javascript_flow_exe='$(npm bin)/flow'
+" let g:syntastic_eruby_ruby_quiet_messages =
+"     \ {'regex': 'useless use of a variable in void context'}
+" let g:syntastic_ruby_mri_quiet_messages = {
+"             \ "type":  "style",
+"             \ "regex": 'assigned but unused variable' }
+
+Plug 'wincent/terminus'
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 " enable jsx syntax highlighting in .js files
@@ -71,8 +95,12 @@ filetype plugin indent on       " load file type plugins + indentation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256 " 256 colors
+if !has('nvim')
+  set term=xterm
+endif
+set t_Co=16
 colorscheme default
+" colorscheme base16-bespin
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -80,8 +108,8 @@ colorscheme default
 syntax enable
 
 " Don't show current mode b/c we have airline
-set noshowmode
-set laststatus=2
+" set noshowmode
+" set laststatus=2
 nnoremap <leader>s :set laststatus=0 showmode<cr>
 nnoremap <leader>S :set laststatus=2 noshowmode<cr>
 
@@ -122,8 +150,8 @@ set history=1000
 
 " Preseve undo across sessions
 if exists("&undodir")
-  set undodir=~/.vim-tmp/undo/
-  set undofile
+" set undodir=~/.vim-tmp/undo/
+" set undofile
 endif
 
 " Resize splits when the window is resized
@@ -132,39 +160,35 @@ au VimResized * :wincmd =
 " Remove trailing whitespace from files on save
 " (except files with "b:noStripWhitespace=1" (only markdown by default))
 fun! StripTrailingWhitespace()
-    " Don't strip on these filetypes
-    if &ft =~ 'markdown'
-        return
-    endif
-    %s/\s\+$//e
+" Don't strip on these filetypes
+if &ft =~ 'markdown'
+    return
+endif
+%s/\s\+$//e
 endfun
 
 autocmd BufWritePre * call StripTrailingWhitespace()
 
 " Return to last edit position when openind files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+ \ if line("'\"") > 0 && line("'\"") <= line("$") |
+ \   exe "normal! g`\"" |
+ \ endif
 
 " Searching
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
+set incsearch  " incremental searching
+set ignorecase " searches are case insensitive...
+set smartcase  " ... unless they contain at least one capital letter
+set gdefault   " Use 'g' flag by default with :s/foo/bar/
 
 " Always set cursor to first line when committing to git
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
-" Set filetype to JS for *.es6 files
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ignore Rubinius, Sass cache files
 set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
 let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\).*'
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vroom
@@ -173,21 +197,8 @@ let g:vroom_test_unit_command="m "
 map <Leader>r :VroomRunTestFile<CR>
 map <Leader>e :VroomRunNearestTest<CR>
 
-nmap <leader>t :w<cr>\|:!time npm run --silent test<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>m :call RenameFile()<cr>
+" tests for RMM
+nmap <leader>t :w<cr>\|:!ruby %<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -199,8 +210,6 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 nnoremap <leader><leader> <c-^>
-map <Leader>f :Ag<space>
-map <Leader>F :AgFromSearch<CR>
 nnoremap <Leader>hs :set hlsearch!<cr>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>m :NERDTreeFind<CR>
@@ -208,8 +217,8 @@ nnoremap <leader>N :set relativenumber!<cr> :set number!<cr>
 
 
 "create newline using Enter or \ without entering insert mode
-nmap \ O<Esc>
-nmap <CR> o<Esc>
+" nmap \ O<Esc>
+" nmap <CR> o<Esc>
 
 "(un)indent lines without leaving visual mode
 vmap > >1v
@@ -226,7 +235,10 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>x :x<CR>
 
 " browse to the current line on Github
-nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
+  " on current branch
+  nnoremap <leader>o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
+  " in creating commit
+  nnoremap <leader>O :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
 
 " allow copying to system clipboard. May work in tandem with tmux
 " https://github.com/lmarburger/dotfiles/blob/master/tmux.conf#L8-L13
@@ -236,51 +248,47 @@ set clipboard=unnamed
 " Color stuff b/c it doesn't work after setting the colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight LineNR ctermfg=238
-highlight Visual term=none cterm=none ctermbg=240
-" highlight Comment ctermfg=238 " only works with dark backgrounds
-highlight Search ctermfg=234 ctermbg=222
-" highlight CursorLine term=none cterm=none ctermbg=236 " sucks on most color schemes
-" highlight CursorLine term=none cterm=none " this makes Ag plugin suck
-highlight String ctermfg=12
-highlight Constant ctermfg=13
-hi clear SpellBad
-hi clear SpellCap
-hi SpellBad cterm=underline
-hi SpellBad ctermfg=9
-hi SpellCap cterm=underline
-hi SpellCap ctermfg=6
+highlight Visual term=reverse cterm=reverse ctermbg=NONE
+" highlight Comment ctermfg=LightGrey
+highlight clear SpellBad
+highlight clear SpellCap
+highlight SpellBad cterm=underline
+highlight SpellBad ctermfg=9
+highlight SpellCap cterm=underline
+highlight SpellCap ctermfg=6
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeShowHidden=1
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeWildIgnore=0
 
 function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
+" " Requires 'scratch' plugin
+" :topleft 100 :split __Routes__
+" " Make sure Vim doesn't write __Routes__ as a file
+" :set buftype=nofile
+" " Delete everything
+" :normal 1GdG
+" " Put routes output in buffer
+" :0r! rake -s routes
+" " Size window to number of lines (1 plus rake output length)
+" :exec ":normal " . line("$") . "_ "
+" " Move cursor to bottom
+" :normal 1GG
+" " Delete empty trailing line
+" :normal dd
 endfunction
 map <leader>gR :call ShowRoutes()<cr>
 
 let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
-  autocmd!
-  autocmd FileType markdown call pencil#init()
-  autocmd FileType textile call pencil#init()
-  autocmd FileType text call pencil#init({'wrap': 'hard'})
+" autocmd!
+" autocmd FileType markdown call pencil#init()
+" autocmd FileType textile call pencil#init()
+" autocmd FileType text call pencil#init({'wrap': 'hard'})
 augroup END
 nmap <leader>p :TogglePencil<cr>
 
@@ -293,10 +301,27 @@ nmap <leader>c :set spell!<cr>
 :nnoremap Q <Nop>
 :nnoremap qQ <Nop>
 
-
 " rubocop
 let g:vimrubocop_config = '/Users/chadoh/.rubocop.yml'
 
-
 " rust
 autocmd Filetype rust setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" persistent undo
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif"
+
+" javascript styles
+" autocmd FileType javascript,javascript.jsx set formatprg=prettier-eslint\ --stdin
+" autocmd BufWritePre *.js,*.jsx Neoformat

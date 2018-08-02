@@ -11,6 +11,7 @@ alias l="ls -l"
 alias ll="ls -al"
 alias g="git"
 alias gg="gitsh"
+alias please="git push --force-with-lease"
 alias v="vim"
 alias r="rails"
 alias reload="source ~/.bash_profile"
@@ -36,6 +37,8 @@ alias y="git s" # overzealous patchwise commits!
 alias p='g p'
 alias http='python -m SimpleHTTPServer'
 alias run='npm run --silent'
+alias x='exit'
+alias aoeu='asdf'
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"
@@ -45,6 +48,7 @@ stty -ixon -ixoff
 
 export LANGUAGE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+export TERM="xterm-256color"
 
 source ~/.functions
 
@@ -54,8 +58,10 @@ source ~/.functions
 #colors
 red=$(tput setaf 1)
 green=$(tput setaf 2)
-cyan=$(tput setaf 6)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
 pink=$(tput setaf 5)
+cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 
 if hash brew 2>/dev/null && [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -84,8 +90,12 @@ if [[ `nick` = "local" ]]; then
 else
   nickcolor=$red
 fi
-PS1="\[$cyan\]\W\[$reset\] \[$pink\]\$(__git_ps1 %s' ')\[$reset\]→ "
+PS1="\[$yellow\]\W\[$reset\] \[$blue\]\$(__git_ps1 %s' ')\[$reset\]→ "
 PS2=" > "
 
 # set up your git credentials, rbenv or rvm init, any special PATH or configs, etc
 source ~/.extra
+
+ssh-add -A &> /dev/null
+
+export PATH="$HOME/.yarn/bin:$PATH"

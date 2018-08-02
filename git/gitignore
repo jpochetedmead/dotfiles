@@ -1,3 +1,5 @@
 .DS_Store
 .ruby-version
+.gs
 config/application.yml
+.tool-versions
