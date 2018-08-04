@@ -85,22 +85,13 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'wincent/terminus'
 Plug 'jparise/vim-graphql'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 " enable jsx syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
 filetype plugin indent on       " load file type plugins + indentation
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COLOR
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !has('nvim')
-  set term=xterm
-endif
-set t_Co=16
-colorscheme default
-" colorscheme base16-bespin
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -245,17 +236,18 @@ nnoremap <leader>x :x<CR>
 set clipboard=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color stuff b/c it doesn't work after setting the colorscheme
+" Colors!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=16 " only use 16 colors, not 256
 highlight LineNR ctermfg=238
 highlight Visual term=reverse cterm=reverse ctermbg=NONE
 " highlight Comment ctermfg=LightGrey
-highlight clear SpellBad
-highlight clear SpellCap
-highlight SpellBad cterm=underline
-highlight SpellBad ctermfg=9
-highlight SpellCap cterm=underline
-highlight SpellCap ctermfg=6
+" highlight clear SpellBad
+" highlight clear SpellCap
+" highlight SpellBad cterm=underline
+" highlight SpellBad ctermfg=9
+" highlight SpellCap cterm=underline
+" highlight SpellCap ctermfg=6
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configure NERDTree
