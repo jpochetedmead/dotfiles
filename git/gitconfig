@@ -10,12 +10,6 @@
   # normal status, or short status
   st = !"git status; git submodule foreach 'git status'"
   s = !"git status -s; git submodule foreach 'git status -s'"
-  # Undo a `git push`
-  undopush = push -f origin HEAD^:master
-  # set up a pull-request using hub gem, defaulting to the develop branch
-  pr = pull-request -b master
-  # Switch to a branch, creating it if necessary
-  go = checkout -B
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull --recurse-submodules"
   # Clone a repository including all submodules
