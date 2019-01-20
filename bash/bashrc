@@ -39,7 +39,7 @@ alias http='python -m SimpleHTTPServer'
 alias run='npm run --silent'
 alias x='exit'
 alias aoeu='asdf'
-alias dark='base16_default-dark' # base16_phd
+alias dark='base16_monokai' #'base16_default-dark' #'base16_phd'
 alias light='base16_cupertino' # base16_solarized-light base16_tomorrow
 
 # Alias hub as git; hub is a fantastic package

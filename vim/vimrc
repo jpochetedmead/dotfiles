@@ -26,7 +26,7 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-git'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kien/ctrlp.vim'
-Plug 'tmhedberg/matchit'
+" Plug 'tmhedberg/matchit' # FIXME 😞
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
@@ -49,6 +49,9 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 Plug 'mxw/vim-jsx'
+" enable jsx syntax highlighting in .js files
+let g:jsx_ext_required = 0
+
 Plug 'pangloss/vim-javascript'
 let g:javascript_plugin_flow = 1
 
@@ -189,16 +192,6 @@ set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
 let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\).*'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vroom
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vroom_test_unit_command="m "
-map <Leader>r :VroomRunTestFile<CR>
-map <Leader>e :VroomRunNearestTest<CR>
-
-" tests for RMM
-nmap <leader>t :w<cr>\|:!ruby %<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move around splits with <c-hjkl>
@@ -213,16 +206,9 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>m :NERDTreeFind<CR>
 nnoremap <leader>N :set relativenumber!<cr> :set number!<cr>
 
-
-"create newline using Enter or \ without entering insert mode
-" nmap \ O<Esc>
-" nmap <CR> o<Esc>
-
 "(un)indent lines without leaving visual mode
 vmap > >1v
 vmap < <1v
-vmap <Tab> >
-vmap <C-Tab> <
 
 " Make Y behave like D or C, instead of dd or yy
 nnoremap Y y$

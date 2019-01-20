@@ -3,3 +3,5 @@
 .gs
 config/application.yml
 .tool-versions
+dumps
+.pryrc
