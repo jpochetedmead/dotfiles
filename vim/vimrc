@@ -307,6 +307,9 @@ if has('persistent_undo')
     set undofile
 endif"
 
+autocmd BufNewFile,BufRead *.prisma set filetype=graphql
+autocmd BufWritePost *.prisma !prisma deploy
+
 " javascript styles
 " autocmd FileType javascript,javascript.jsx set formatprg=prettier-eslint\ --stdin
 " autocmd BufWritePre *.js,*.jsx Neoformat
