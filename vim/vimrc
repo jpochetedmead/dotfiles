@@ -2,6 +2,7 @@ set shell=/bin/bash
 set encoding=utf-8
 filetype off
 set mouse=a
+set ttymouse=xterm
 let mapleader=" "
 
 
@@ -66,26 +67,6 @@ Plug 'mhinz/vim-mix-format'
 let g:mix_format_on_save = 1
 
 Plug 'neomake/neomake'
-Plug 'vim-syntastic/syntastic'
-
-" let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute']
-" " set statusline+=%#warningmsg#
-" " set statusline+=%{SyntasticStatuslineFlag()}
-" " set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 1
-" let g:syntastic_javascript_checkers=['eslint', 'flow']
-" let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
-" let g:syntastic_javascript_flow_exe='$(npm bin)/flow'
-" let g:syntastic_eruby_ruby_quiet_messages =
-"     \ {'regex': 'useless use of a variable in void context'}
-" let g:syntastic_ruby_mri_quiet_messages = {
-"             \ "type":  "style",
-"             \ "regex": 'assigned but unused variable' }
-
 Plug 'wincent/terminus'
 Plug 'jparise/vim-graphql'
 Plug 'chriskempson/base16-vim'
@@ -96,10 +77,49 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-call plug#end()
+" React code snippets
+Plug 'chadoh/vim-react-snippets'
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<C-l>"
 
-" enable jsx syntax highlighting in .js files
-let g:jsx_ext_required = 0
+Plug 'styled-components/vim-styled-components'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'janko-m/vim-test'
+nmap <silent> t<C-n> :w<cr>\|:TestNearest<CR>
+nmap <silent> t<C-f> :w<cr>\|:TestFile<CR>
+nmap <silent> t<C-s> :w<cr>\|:TestSuite<CR>
+nmap <silent> t<C-l> :w<cr>\|:TestLast<CR>
+nmap <silent> t<C-g> :w<cr>\|:TestVisit<CR>
+
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<c-t>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+Plug 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_lint_on_enter = 0
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\}
+nnoremap <leader>d :ALEGoToDefinition<cr>
+nnoremap <silent> <leader>e :ALENextWrap<cr>
+nnoremap <silent> <leader>E :ALEPreviousWrap<cr>
+
+Plug 'itchyny/lightline.vim'
+set laststatus=2
+set noshowmode
+let g:lightline = { 'colorscheme': 'wombat' }
+
+Plug 'leafgarland/typescript-vim'
+
+call plug#end()
 
 filetype plugin indent on       " load file type plugins + indentation
 
