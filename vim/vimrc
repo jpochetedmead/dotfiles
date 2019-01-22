@@ -49,10 +49,6 @@ Plug 'junegunn/limelight.vim'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-Plug 'mxw/vim-jsx'
-" enable jsx syntax highlighting in .js files
-let g:jsx_ext_required = 0
-
 Plug 'pangloss/vim-javascript'
 let g:javascript_plugin_flow = 1
 
@@ -81,6 +77,7 @@ nmap ga <Plug>(EasyAlign)
 Plug 'chadoh/vim-react-snippets'
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips/"
 
 Plug 'styled-components/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
@@ -102,11 +99,12 @@ let g:user_emmet_settings = {
 Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_lint_on_enter = 0
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
 \}
 nnoremap <leader>d :ALEGoToDefinition<cr>
 nnoremap <silent> <leader>e :ALENextWrap<cr>
@@ -118,6 +116,8 @@ set noshowmode
 let g:lightline = { 'colorscheme': 'wombat' }
 
 Plug 'leafgarland/typescript-vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
+hi jsxAttrib cterm=italic
 
 call plug#end()
 
@@ -254,7 +254,7 @@ set clipboard=unnamed
 set t_Co=16 " only use 16 colors, not 256
 highlight LineNR ctermfg=238
 highlight Visual term=reverse cterm=reverse ctermbg=NONE
-" highlight Comment ctermfg=LightGrey
+hi Comment cterm=italic
 " highlight clear SpellBad
 " highlight clear SpellCap
 " highlight SpellBad cterm=underline
@@ -329,7 +329,3 @@ endif"
 
 autocmd BufNewFile,BufRead *.prisma set filetype=graphql
 autocmd BufWritePost *.prisma !prisma deploy
-
-" javascript styles
-" autocmd FileType javascript,javascript.jsx set formatprg=prettier-eslint\ --stdin
-" autocmd BufWritePre *.js,*.jsx Neoformat
