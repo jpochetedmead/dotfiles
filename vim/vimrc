@@ -36,7 +36,7 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'vim-scripts/slimv.vim'
 Plug 'vim-scripts/scratch.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'spf13/vim-autoclose'
+Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/vim-pencil'
 Plug 'junegunn/goyo.vim'
