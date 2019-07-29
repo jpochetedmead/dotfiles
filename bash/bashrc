@@ -41,6 +41,7 @@ alias x='exit'
 alias aoeu='asdf'
 alias dark='base16_monokai' #'base16_default-dark' #'base16_phd'
 alias light='base16_cupertino' # base16_solarized-light base16_tomorrow
+alias python="python3"
 
 # Alias hub as git; hub is a fantastic package
 eval "$(hub alias -s)"
@@ -66,13 +67,11 @@ pink=$(tput setaf 5)
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 
-if hash brew 2>/dev/null && [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-  export GIT_PS1_SHOWDIRTYSTATE=1
-  export GIT_PS1_SHOWSTASHSTATE=1
-  export GIT_PS1_SHOWUNTRACKEDFILES=1
-elif [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
+# brew autocompletions, see https://docs.brew.sh/Shell-Completion
+if hash brew 2>/dev/null && [ -d $(brew --prefix)/etc/bash_completion.d ]; then
+  for completion_file in $(brew --prefix)/etc/bash_completion.d/*; do
+    source "$completion_file"
+  done
   export GIT_PS1_SHOWDIRTYSTATE=1
   export GIT_PS1_SHOWSTASHSTATE=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1

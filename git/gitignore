@@ -5,3 +5,8 @@ config/application.yml
 .tool-versions
 dumps
 .pryrc
+.vscode/settings.json
+.vscode/tasks.json
+node_modules
+xcuserdata
+.vimrc

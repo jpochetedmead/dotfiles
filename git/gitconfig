@@ -18,6 +18,7 @@
   fuckit = !git clean -d -f && git reset --hard
   # misc & self-explanatory
   amend = commit --amend
+  please = push --force-with-lease
   aa = add --all
   d = diff --patch-with-stat
   dc = diff --cached --patch-with-stat

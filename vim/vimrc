@@ -54,6 +54,8 @@ let g:javascript_plugin_flow = 1
 
 Plug 'ngmy/vim-rubocop'
 Plug 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
+
 Plug 'cespare/vim-toml'
 Plug 'chase/vim-ansible-yaml'
 Plug 'sbdchd/neoformat'
@@ -79,7 +81,7 @@ Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<C-l>"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips/"
 
-Plug 'styled-components/vim-styled-components'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'janko-m/vim-test'
 nmap <silent> t<C-n> :w<cr>\|:TestNearest<CR>
@@ -119,6 +121,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 hi jsxAttrib cterm=italic
 
+Plug 'tomlion/vim-solidity'
 call plug#end()
 
 filetype plugin indent on       " load file type plugins + indentation
@@ -209,7 +212,7 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildignore+=*/tmp/**,*.scssc,*.sassc,*compiled*
-let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\).*'
+let g:ctrlp_custom_ignore = '.*\(node_modules\|build\|bower_components\|dist\).*'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -309,9 +312,6 @@ nmap <leader>c :set spell!<cr>
 " rubocop
 let g:vimrubocop_config = '/Users/chadoh/.rubocop.yml'
 
-" rust
-autocmd Filetype rust setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-
 " persistent undo
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
@@ -329,3 +329,7 @@ endif"
 
 autocmd BufNewFile,BufRead *.prisma set filetype=graphql
 autocmd BufWritePost *.prisma !prisma deploy
+
+" allow directory-specific vimrc files, securely
+set exrc
+set secure
