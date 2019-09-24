@@ -1,0 +1,16 @@
+# PATH additions
+export PATH="~/.rbenv/bin:~/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH"
+
+# Ruby version manager
+eval "$(rbenv init -)"
+
+# Git credentials
+# Not in the repository, so people don't commit as the wrong person
+GIT_AUTHOR_NAME="Julio Pochet Edmead"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="jpe3841@gmail.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+git config --global github.user jpochetedmead
